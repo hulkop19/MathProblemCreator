@@ -1,0 +1,40 @@
+﻿<Window x:Class="MathProblemCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MathProblemCreator"
+        mc:Ignorable="d"
+        Title="MathProblemCreator" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Margin="5" Grid.Row="1" Height="40" Width="120" VerticalAlignment="Top" x:Name="addWorkBtn" Click="AddWorkBtn_Click">Добавить Работу</Button>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Работы</Label>
+        <ListBox x:Name="worksLb" Grid.Row="1" HorizontalContentAlignment="Stretch">
+            <ListBox.Resources>
+                <ContextMenu x:Key="MyElementMenu">
+                    <MenuItem x:Name="deleteMenuItem" Header="удалить" Click="DeleteMenuItem_Click"/>
+                </ContextMenu>
+
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="ContextMenu" Value="{StaticResource MyElementMenu}"/>
+                </Style>
+            </ListBox.Resources>
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="nameTextBlock" Text="{Binding Name}" MouseLeftButtonUp="NameTextBlock_MouseLeftButtonUp"/>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+    </Grid>
+</Window>
