@@ -13,20 +13,7 @@ namespace MathProblemCreator.BussinessLogik
         public string Name { get; }
         public int NumberOfVariants { get; }
         private List<List<string>> _variants;
-        public List<List<string>> Variants
-        {
-            get
-            {
-                return _variants;
-            }
-            set
-            {
-                if (value.Count == NumberOfVariants)
-                {
-                    _variants = value;
-                } 
-            }
-        }
+        public List<List<string>> Variants { get; set; }
 
         [JsonConstructor]
         public Work(int id, string name, int numberOfVariants)

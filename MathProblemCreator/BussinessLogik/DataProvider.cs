@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MathProblemCreator.BussinessLogik.Problems;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,13 @@ namespace MathProblemCreator.BussinessLogik
             var jsonString = DataBaseEmulator.ReadData(@".\Data\worksData.json");
 
             return JsonConvert.DeserializeObject<List<Work>>(jsonString);
+        }
+
+        public static List<ProblemInfo> GetProblemsInfo()
+        {
+            var jsonString = DataBaseEmulator.ReadData(@".\Data\Problems\problemsInfo.json");
+
+            return JsonConvert.DeserializeObject<List<ProblemInfo>>(jsonString);
         }
 
         public static void SetWorkList(List<Work> works)

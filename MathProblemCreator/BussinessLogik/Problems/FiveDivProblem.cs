@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MathProblemCreator.BussinessLogik.Problems
 {
-    class FiveDivProblem //: IProblem
+    class FiveDivProblem : IProblem
     {
         readonly int _maxDeg;
         readonly int _minDeg;

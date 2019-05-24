@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MathProblemCreator"
         mc:Ignorable="d"
-        Title="DeleteWorkWindow" Height="130" Width="300">
+        Title="DeleteWorkWindow" Height="130" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

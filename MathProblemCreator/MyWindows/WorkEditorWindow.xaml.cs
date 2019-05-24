@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MathProblemCreator.BussinessLogik;
+using MathProblemCreator.BussinessLogik.Problems;
 
 namespace MathProblemCreator.MyWindows
 {
@@ -104,6 +105,24 @@ namespace MathProblemCreator.MyWindows
             problemsLb.ItemsSource = null;
             problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
             problemsLb.SelectedIndex = index + offset;
+        }
+
+        private void AddProblemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsEnabled = false;
+            IProblem newProblem = AddProblemWindow.GetNewProblem();
+            this.IsEnabled = true;
+
+            if (newProblem != null)
+            {
+                for (int i = 0; i < _work.Variants.Count; ++i)
+                {
+                    _work.Variants[i].Add(newProblem.Generate());
+                }
+
+                problemsLb.ItemsSource = null;
+                problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+            }
         }
     }
 }

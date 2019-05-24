@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MathProblemCreator.BussinessLogik;
 using Newtonsoft.Json;
 using MathProblemCreator.MyWindows;
+using System.IO;
 
 namespace MathProblemCreator
 {

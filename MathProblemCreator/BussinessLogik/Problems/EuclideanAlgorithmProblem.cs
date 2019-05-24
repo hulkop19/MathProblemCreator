@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathProblemCreator.BussinessLogik.Problems
 {
-    class EuclideanAlgorithmProblem //: IProblem
+    class EuclideanAlgorithmProblem : IProblem
     {
         readonly int _minNum;
         readonly int _maxNum;
