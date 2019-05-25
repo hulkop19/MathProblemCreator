@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MathProblemCreator.BussinessLogik;
 using MathProblemCreator.BussinessLogik.Problems;
+using Microsoft.Win32;
 
 namespace MathProblemCreator.MyWindows
 {
@@ -122,6 +123,20 @@ namespace MathProblemCreator.MyWindows
 
                 problemsLb.ItemsSource = null;
                 problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+            }
+        }
+
+        private void CreateDocBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsEnabled = false;
+            var saveFileWindow = new SaveFileDialog();
+            saveFileWindow.DefaultExt = ".doc";
+            var isSuccess = saveFileWindow.ShowDialog();
+            this.IsEnabled = true;
+
+            if (isSuccess == true && saveFileWindow.ValidateNames)
+            {
+                DataProvider.CreateDoc(_work, saveFileWindow.FileName);
             }
         }
     }

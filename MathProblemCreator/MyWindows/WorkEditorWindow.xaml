@@ -27,7 +27,7 @@
 
         <StackPanel VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
             <Button x:Name="addProblemBtn" Click="AddProblemBtn_Click">Добавить Задачу</Button>
-            <Button>Создать документ</Button>
+            <Button x:Name="createDocBtn" Click="CreateDocBtn_Click">Создать документ</Button>
         </StackPanel>
 
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">

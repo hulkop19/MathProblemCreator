@@ -1,9 +1,15 @@
-﻿using MathProblemCreator.BussinessLogik.Problems;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Office2010.Word;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using MathProblemCreator.BussinessLogik.Problems;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +48,50 @@ namespace MathProblemCreator.BussinessLogik
 
                 DataBaseEmulator.WriteData(Path.Combine(dataPath, "lastWorkId.json"), "0\n");
                 SetWorkList(new List<Work>());
+            }
+        }
+
+        public static void CreateDoc(Work work, string outFile)
+        {
+            using (WordprocessingDocument wordDocument =
+            WordprocessingDocument.Create(outFile, WordprocessingDocumentType.Document))
+            {
+                // Add a main document part. 
+                MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+
+                // Create the document structure and add some text.
+                mainPart.Document = new Document();
+                Body body = mainPart.Document.AppendChild(new Body());
+                Paragraph para = body.AppendChild(new Paragraph());
+                para.ParagraphProperties = new ParagraphProperties();
+
+                for (int i = 0; i < work.Variants.Count; ++i)
+                {
+                    Run run = para.AppendChild(new Run());
+
+                    para.ParagraphProperties.Append(new Justification() { Val = JustificationValues.Center });
+
+                    run.RunProperties = new RunProperties();
+                    run.RunProperties.Append(new FontSize() { Val = "40" });
+                    run.AppendChild(new Text($"Вариант {i + 1}\n"));
+
+                    int ind = 1;
+
+                    foreach (var problem in work.Variants[i])
+                    {
+                        para = body.AppendChild(new Paragraph());
+                        para.Append(new ParagraphProperties());
+                        para.ParagraphProperties.Append(new SpacingBetweenLines() { Before = "100", After = "100" });
+                        run = para.AppendChild(new Run());
+                        run.RunProperties = new RunProperties();
+                        run.RunProperties.Append(new FontSize() { Val = "30" });
+                        run.AppendChild(new Text($"{ind++}) {problem}\n"));
+                    }
+
+                    para = body.AppendChild(new Paragraph());
+                    para.ParagraphProperties = new ParagraphProperties();
+                    para.ParagraphProperties.PageBreakBefore = new PageBreakBefore();
+                }
             }
         }
     }
