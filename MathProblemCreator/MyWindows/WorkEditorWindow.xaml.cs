@@ -47,10 +47,7 @@ namespace MathProblemCreator.MyWindows
 
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < _work.Variants.Count; ++i)
-            {
-                _work.Variants[i].RemoveAt(problemsLb.SelectedIndex);
-            }
+            _work.DeleteProblem(problemsLb.SelectedIndex);
 
             problemsLb.ItemsSource = null;
             problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex].Select(p => new { Problem = p.Problem, Answer = p.Answer });

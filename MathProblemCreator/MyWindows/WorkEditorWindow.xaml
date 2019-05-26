@@ -38,7 +38,7 @@
 
         <StackPanel VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1">
             <Button x:Name="cancelBtn" Click="CancelBtn_Click">Отмена</Button>
-            <Button x:Name="applyBtn" Click="ApplyBtn_Click">применить</Button>
+            <Button x:Name="applyBtn" Click="ApplyBtn_Click">Применить</Button>
         </StackPanel>
 
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Задачи</Label>

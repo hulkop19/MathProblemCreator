@@ -53,5 +53,13 @@ namespace MathProblemCreator.BussinessLogik
                 variant.Add((generated.Problem, generated.Answer));
             }
         }
+
+        public void DeleteProblem(int problemIndex)
+        {
+            for (int i = 0; i < Variants.Count; ++i)
+            {
+                Variants[i].RemoveAt(problemIndex);
+            }
+        }
     }
 }
