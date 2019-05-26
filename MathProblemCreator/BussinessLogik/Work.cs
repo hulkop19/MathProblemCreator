@@ -10,7 +10,7 @@ namespace MathProblemCreator.BussinessLogik
         public int Id { get; }
         public string Name { get; }
         public int NumberOfVariants { get; }
-        public List<List<string>> Variants { get; set; }
+        public List<List<(string Problem, string Answer)>> Variants { get; set; }
 
         [JsonConstructor]
         public Work(int id, string name, int numberOfVariants)
@@ -19,7 +19,7 @@ namespace MathProblemCreator.BussinessLogik
             Name = name;
             NumberOfVariants = numberOfVariants;
 
-            Variants = new List<List<string>>();
+            Variants = new List<List<(string Problem, string Answer)>>();
         }
 
         public Work(string name, int numberOfVariants)
@@ -28,11 +28,11 @@ namespace MathProblemCreator.BussinessLogik
             Name = name;
             NumberOfVariants = numberOfVariants;
 
-            Variants = new List<List<string>>();
+            Variants = new List<List<(string Problem, string Answer)>>();
             
             for (int i = 0; i < numberOfVariants; ++i)
             {
-                Variants.Add(new List<string>());
+                Variants.Add(new List<(string Problem, string Answer)>());
             }
         }
 
@@ -49,7 +49,8 @@ namespace MathProblemCreator.BussinessLogik
         {
             foreach (var variant in Variants)
             {
-                variant.Add(problem.Generate());
+                var generated = problem.Generate();
+                variant.Add((generated.Problem, generated.Answer));
             }
         }
     }

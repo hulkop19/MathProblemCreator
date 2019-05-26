@@ -27,9 +27,39 @@ namespace MathProblemCreator.BussinessLogik.Problems
             _divider = int.Parse(data[6]);
         }
 
-        public string Generate()
+        public (string Problem, string Answer) Generate()
         {
-            return Format(GetGeneratorResult());
+            var generated = GetGeneratorResult();
+            return (Format(generated), GetSolve(generated));
+        }
+
+        private string GetSolve(List<int> resultOfGenerator)
+        {
+            int num1 = resultOfGenerator[0];
+            int num2 = resultOfGenerator[1];
+            int deg = resultOfGenerator[2];
+
+            int result1 = RemindPow(num1, deg);
+            result1 *= RemindPow(int.Parse($"{num1}{num1}"), deg);
+            result1 *= RemindPow(int.Parse($"{num1}{num1}{num1}"), deg);
+
+            int result2 = RemindPow(num2, deg);
+            result2 *= RemindPow(int.Parse($"{num2}{num2}"), deg);
+            result2 *= RemindPow(int.Parse($"{num2}{num2}{num2}"), deg);
+
+            return $"Остаток = {(result1 + result2) % _divider}";
+        }
+
+        private int RemindPow(int num, int pow)
+        {
+            int rem = 1;
+            for (int i = 1; i <= pow; ++i)
+            {
+                rem *= num;
+                rem %= _divider;
+            }
+
+            return rem;
         }
 
         private int GetNumberOfReminds(int num)
@@ -90,7 +120,8 @@ namespace MathProblemCreator.BussinessLogik.Problems
             int num2 = resultOfGenerator[1];
             int deg = resultOfGenerator[2];
 
-            return $"({num1}^{deg} * {num1}{num1}^{deg} * {num1}{num1}{num1}^{deg}) + " +
+            return $"Найдите остаток выражения от деления на {_divider}: " +
+                   $"({num1}^{deg} * {num1}{num1}^{deg} * {num1}{num1}{num1}^{deg}) + " +
                    $"({num2}^{deg} * {num2}{num2}^{deg} * {num2}{num2}{num2}^{deg})";
         }
     }

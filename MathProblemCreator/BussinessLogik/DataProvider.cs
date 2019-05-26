@@ -51,15 +51,13 @@ namespace MathProblemCreator.BussinessLogik
             }
         }
 
-        public static void CreateDoc(Work work, string outFile)
+        public static void CreateDoc(Work work, string outFile, bool IsAnswers)
         {
             using (WordprocessingDocument wordDocument =
             WordprocessingDocument.Create(outFile, WordprocessingDocumentType.Document))
             {
-                // Add a main document part. 
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
 
-                // Create the document structure and add some text.
                 mainPart.Document = new Document();
                 Body body = mainPart.Document.AppendChild(new Body());
                 Paragraph para = body.AppendChild(new Paragraph());
@@ -68,7 +66,6 @@ namespace MathProblemCreator.BussinessLogik
                 for (int i = 0; i < work.Variants.Count; ++i)
                 {
                     Run run = para.AppendChild(new Run());
-
                     para.ParagraphProperties.Append(new Justification() { Val = JustificationValues.Center });
 
                     run.RunProperties = new RunProperties();
@@ -76,7 +73,6 @@ namespace MathProblemCreator.BussinessLogik
                     run.AppendChild(new Text($"Вариант {i + 1}\n"));
 
                     int ind = 1;
-
                     foreach (var problem in work.Variants[i])
                     {
                         para = body.AppendChild(new Paragraph());
@@ -85,7 +81,16 @@ namespace MathProblemCreator.BussinessLogik
                         run = para.AppendChild(new Run());
                         run.RunProperties = new RunProperties();
                         run.RunProperties.Append(new FontSize() { Val = "30" });
-                        run.AppendChild(new Text($"{ind++}) {problem}\n"));
+
+                        if (IsAnswers)
+                        {
+                            run.AppendChild(new Text($"{ind++}) {problem.Answer}\n"));
+                        }
+                        else
+                        {
+                            run.AppendChild(new Text($"{ind++}) {problem.Problem}\n"));
+                        }
+                        
                     }
 
                     para = body.AppendChild(new Paragraph());

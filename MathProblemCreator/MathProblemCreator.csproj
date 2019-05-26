@@ -90,6 +90,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="BussinessLogik\Problems\IrreducibleFractionProblem.cs" />
+    <Compile Include="BussinessLogik\Problems\IsNumberSquareProblem.cs" />
     <Compile Include="BussinessLogik\Problems\ProblemInfo.cs" />
     <Compile Include="MyWindows\AddProblemWindow.xaml.cs">
       <DependentUpon>AddProblemWindow.xaml</DependentUpon>

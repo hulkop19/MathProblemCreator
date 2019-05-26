@@ -26,8 +26,9 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel VerticalAlignment="Top" Grid.Row="1" Grid.Column="1">
-            <Button x:Name="addProblemBtn" Click="AddProblemBtn_Click">Добавить Задачу</Button>
-            <Button x:Name="createDocBtn" Click="CreateDocBtn_Click">Создать документ</Button>
+            <Button x:Name="addProblemBtn" Click="AddProblemBtn_Click" Margin="10,5">Добавить Задачу</Button>
+            <Button x:Name="createDocBtn" Click="CreateProblemsDocBtn_Click">Сохранить задачи</Button>
+            <Button x:Name="createAnswersDocBtn" Click="CreateAnswersDocBtn_Click">Сохранить ответы</Button>
         </StackPanel>
 
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
@@ -63,7 +64,11 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock x:Name="nameTextBlock" Text="{Binding}"/>
+                    <TextBlock x:Name="nameTextBlock" Text="{Binding Problem}">
+                        <TextBlock.ToolTip>
+                            <TextBlock Text="{Binding Answer}"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 

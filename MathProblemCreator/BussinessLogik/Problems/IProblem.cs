@@ -2,6 +2,6 @@
 {
     public interface IProblem
     {
-        string Generate();
+        (string Problem, string Answer) Generate();
     }
 }

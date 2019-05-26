@@ -33,8 +33,7 @@ namespace MathProblemCreator.MyWindows
 
         private void WorkEditorWindowLoaded(object sender, RoutedEventArgs e)
         {
-            problemsLb.ItemsSource = _work.Variants[0];
-
+            problemsLb.ItemsSource = _work.Variants[0].Select(p => new { Problem = p.Problem, Answer = p.Answer});
             variantsComboBox.ItemsSource = Enumerable.Range(1, _work.Variants.Count);
         }
 
@@ -54,12 +53,12 @@ namespace MathProblemCreator.MyWindows
             }
 
             problemsLb.ItemsSource = null;
-            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex].Select(p => new { Problem = p.Problem, Answer = p.Answer });
         }
 
         private void VariantsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex].Select(p => new { Problem = p.Problem, Answer = p.Answer });
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
@@ -104,7 +103,7 @@ namespace MathProblemCreator.MyWindows
             }
 
             problemsLb.ItemsSource = null;
-            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+            problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex].Select(p => new { Problem = p.Problem, Answer = p.Answer });
             problemsLb.SelectedIndex = index + offset;
         }
 
@@ -122,21 +121,35 @@ namespace MathProblemCreator.MyWindows
                 }
 
                 problemsLb.ItemsSource = null;
-                problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex];
+                problemsLb.ItemsSource = _work.Variants[variantsComboBox.SelectedIndex].Select(p => new { Problem = p.Problem, Answer = p.Answer });
             }
         }
 
-        private void CreateDocBtn_Click(object sender, RoutedEventArgs e)
+        private void CreateProblemsDocBtn_Click(object sender, RoutedEventArgs e)
         {
             this.IsEnabled = false;
             var saveFileWindow = new SaveFileDialog();
-            saveFileWindow.DefaultExt = ".doc";
+            saveFileWindow.DefaultExt = ".docx";
             var isSuccess = saveFileWindow.ShowDialog();
             this.IsEnabled = true;
 
             if (isSuccess == true && saveFileWindow.ValidateNames)
             {
-                DataProvider.CreateDoc(_work, saveFileWindow.FileName);
+                DataProvider.CreateDoc(_work, saveFileWindow.FileName, false);
+            }
+        }
+
+        private void CreateAnswersDocBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsEnabled = false;
+            var saveFileWindow = new SaveFileDialog();
+            saveFileWindow.DefaultExt = ".docx";
+            var isSuccess = saveFileWindow.ShowDialog();
+            this.IsEnabled = true;
+
+            if (isSuccess == true && saveFileWindow.ValidateNames)
+            {
+                DataProvider.CreateDoc(_work, saveFileWindow.FileName, true);
             }
         }
     }

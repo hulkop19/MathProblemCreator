@@ -54,6 +54,14 @@ namespace MathProblemCreator.MyWindows
             {
                 return new FiveDivProblem(parametrs);
             }
+            else if (id == "IrreducibleFractionProblem")
+            {
+                return new IrreducibleFractionProblem(parametrs);
+            }
+            else if (id == "IsNumberSquareProblem")
+            {
+                return new IsNumberSquareProblem(parametrs);
+            }
 
             throw new NotImplementedException();
         }

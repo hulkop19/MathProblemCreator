@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathProblemCreator.BussinessLogik.Problems
 {
-    class EuclideanAlgorithmProblem : IProblem
+    class IrreducibleFractionProblem : IProblem
     {
         readonly int _minNum;
         readonly int _maxNum;
@@ -14,9 +14,15 @@ namespace MathProblemCreator.BussinessLogik.Problems
         readonly int _maxAnsw;
         readonly int _minSteps;
         readonly int _maxSteps;
-        static ushort _seed = (ushort) (new Random().Next(1000));
+        static ushort _seed = (ushort)(new Random().Next(1000));
 
-        public EuclideanAlgorithmProblem(string param)
+        public (string Problem, string Answer) Generate()
+        {
+            var generated = GetGeneratorResult();
+            return (Format(generated), GetSolve(generated));
+        }
+
+        public IrreducibleFractionProblem(string param)
         {
             var data = param.Split(',');
 
@@ -28,16 +34,10 @@ namespace MathProblemCreator.BussinessLogik.Problems
             _maxSteps = int.Parse(data[5]);
         }
 
-        public (string Problem, string Answer) Generate()
-        {
-            var generated = GetGeneratorResult();
-            return (Format(generated), GetSolve(generated));
-        }
-
         private string GetSolve((int, int) resultOfGenerator)
         {
             var gcdResult = Gcd(resultOfGenerator.Item1, resultOfGenerator.Item2);
-            return $"НОД = {gcdResult.Number}, количество шагов алгоритма = {gcdResult.NumberOfSteps}";
+            return $"Несократимая дробь: {resultOfGenerator.Item1 / gcdResult.Number}/{resultOfGenerator.Item2 / gcdResult.Number}";
         }
 
         private (int Number, int NumberOfSteps) Gcd(int x, int y)
@@ -87,8 +87,7 @@ namespace MathProblemCreator.BussinessLogik.Problems
 
         private string Format((int Num1, int Num2) resultOfGenerator)
         {
-            return $"Найдите НОД чисел: {resultOfGenerator.Num1} и {resultOfGenerator.Num2}";
+            return $"Приведите к несократимой дробь: {resultOfGenerator.Num1}/{resultOfGenerator.Num2}";
         }
     }
 }
-    
