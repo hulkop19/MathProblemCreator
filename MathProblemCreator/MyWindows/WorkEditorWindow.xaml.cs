@@ -132,7 +132,7 @@ namespace MathProblemCreator.MyWindows
 
             if (isSuccess == true && saveFileWindow.ValidateNames)
             {
-                DataProvider.CreateDoc(_work, saveFileWindow.FileName, false);
+                _work.CreateDoc(saveFileWindow.FileName, false);
             }
         }
 
@@ -146,7 +146,7 @@ namespace MathProblemCreator.MyWindows
 
             if (isSuccess == true && saveFileWindow.ValidateNames)
             {
-                DataProvider.CreateDoc(_work, saveFileWindow.FileName, true);
+                _work.CreateDoc(saveFileWindow.FileName, true);
             }
         }
     }
