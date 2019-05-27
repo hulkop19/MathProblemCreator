@@ -24,18 +24,18 @@ namespace MathProblemCreator.BussinessLogik
             return JsonConvert.DeserializeObject<List<Work>>(jsonString);
         }
 
-        public static List<ProblemInfo> GetProblemsInfo()
-        {
-            var jsonString = DataBaseEmulator.ReadData(@".\Data\Problems\problemsInfo.json");
-
-            return JsonConvert.DeserializeObject<List<ProblemInfo>>(jsonString);
-        }
-
         public static void SetWorkList(List<Work> works)
         {
             var jsonString = JsonConvert.SerializeObject(works);
 
             DataBaseEmulator.WriteData(@".\Data\worksData.json", jsonString);
+        }
+
+        public static List<ProblemInfo> GetProblemsInfo()
+        {
+            var jsonString = DataBaseEmulator.ReadData(@".\Data\Problems\problemsInfo.json");
+
+            return JsonConvert.DeserializeObject<List<ProblemInfo>>(jsonString);
         }
 
         public static void Initialize()

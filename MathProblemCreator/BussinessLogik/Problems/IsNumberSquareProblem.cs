@@ -24,7 +24,7 @@ namespace MathProblemCreator.BussinessLogik.Problems
 
         private int GetResultOfGeneration()
         {
-            var rand = new Random(_seed);
+            var rand = new Random(_seed++);
             int num = rand.Next(100000000, 999999900);
 
             while (!(num % _div == 0 && num % (_div * _div) != 0))

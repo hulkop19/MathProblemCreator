@@ -89,7 +89,6 @@ namespace MathProblemCreator.BussinessLogik.Problems
         {
             List<int> result = new List<int>();  // [num1, num2, degree]
             _seed = (ushort)((_seed + 1) % ushort.MaxValue);
-            Console.WriteLine($"seed: {_seed}");
             var random = new Random(_seed);
 
             int num = random.Next(_minBase, _maxBase);
